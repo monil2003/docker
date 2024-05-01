@@ -1,0 +1,19 @@
+services:
+  website:
+    image: wordpress:latest
+    ports:
+      - "3000:80"
+  website2:
+    image: wordpress:21BCP217
+    ports:
+      -"3200:80"
+    networks:
+      - wordpress_net:
+          ipv4_address: 192.168.99.20
+
+networks:
+  wordpress_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.99.0/24"

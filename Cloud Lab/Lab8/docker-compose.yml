@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  21bcp217-mariadb-container:
+    image: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_USER=user
+      - MARIADB_PASSWORD=password
+      - MARIADB_DATABASE=wordpress_db
+ 
+  21bcp217-wordpress-container:
+    image: wordpress
+    environment:
+      - WORDPRESS_DB_NAME=wordpress_db
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=password
+      - WORDPRESS_DB_HOST=21bcp217-mariadb-container
+    ports:
+      - "8080:80"
+    depends_on:
+      - 21bcp217-mariadb-container
